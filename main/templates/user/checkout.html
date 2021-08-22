@@ -1,0 +1,297 @@
+<!-- extending base html -->
+{%extends 'base.html'%}
+<!-- base template extended -->
+<!-- loading static -->
+{%load static%}
+<!-- static files has been loaded -->
+{% block main_content %}
+<!-- main block starts here -->
+<!-- content starts -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+<style>
+    .checkout {
+        font-family: "Red Hat Display", sans-serif;
+        padding-top: 150px;
+        padding-bottom: 100px;
+    }
+    
+    #image-take {
+        height: 80px;
+        width: 120px;
+        border-radius: 5px;
+    }
+    
+    .products-list {
+        margin: 10px 10px 10px 10px;
+    }
+    
+    .item-detail {
+        padding-left: 5px;
+    }
+    
+    .input {
+        padding: 13px 0px 13px 25px;
+        width: 100%;
+        text-align: center;
+        border: 2px solid #dddddd;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        word-spacing: 3px;
+        outline: none;
+        font-size: 16px;
+        color: #555555;
+    }
+    
+    .card-grp {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .card-item {
+        width: 48%;
+    }
+    
+    .space {
+        margin-bottom: 20px;
+    }
+    
+    .icon-relative {
+        position: relative;
+    }
+    
+    .icon-relative .fas,
+    .icon-relative .far {
+        position: absolute;
+        bottom: 12px;
+        left: 15px;
+        font-size: 20px;
+        color: #555555;
+    }
+    
+    .pay-btn {
+        margin-top: 40px;
+        background: #2196F3;
+        padding: 12px;
+        text-align: center;
+        color: #f8f8f8;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .payment-logo {
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 100px;
+        background: #f8f8f8;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        line-height: 85px;
+    }
+    
+    .payment-logo:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 90px;
+        height: 90px;
+        background: #2196F3;
+        border-radius: 50%;
+    }
+    
+    .payment-logo p {
+        position: relative;
+        color: #f8f8f8;
+        font-family: 'Baloo Bhaijaan', cursive;
+        font-size: 58px;
+    }
+    
+    @media screen and (max-width: 420px) {
+        .card-grp {
+            flex-direction: column;
+        }
+        .card-item {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-top: 20px;
+        }
+    }
+</style>
+<section class="checkout">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                <div class="all">
+                    <div class="form-wrapper">
+                        <form id="form">
+                            <div id="shipping-info">
+                                <input type="hidden" name="total-value" value="{{order.get_cart_total}}">
+                                <input type="hidden" name="all_item" value="{{order.order_id_list}}"> {%if not user.is_authenticated%}
+                                <div class="card space icon-relative">
+                                    <input type="text" id="name" name="name" class="input" placeholder="Name">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="msg" style="margin-top: -20px;">
+                                    <small style="font-size: small;">*default user name is given name</small><br>
+                                    <small style="font-size: small;">*default password 12345</small>
+                                </div>
+                                <!--  -->
+                                {%endif%}
+                                <div class="card space icon-relative">
+                                    <input type="text" id="address" name="address" class="input" placeholder="Address">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="card-grp space">
+                                    <div class="card-item icon-relative">
+                                        <input type="text" id="city" name="city" class="input" placeholder="CITY">
+                                    </div>
+                                    <div class="card-item icon-relative">
+                                        <input type="text" id="state" name="state" class="input" placeholder="STATE">
+                                    </div>
+                                </div>
+                                <div class="card space icon-relative">
+                                    <input type="text" id="zip" name="zip" class="input" placeholder="Zip">
+                                </div>
+                                {%if not user.is_authenticated%}
+                                <div class="card space icon-relative">
+                                    <input type="text" name="email" class="input" placeholder="Email Address">
+                                    <i class="fas fa-at"></i>
+                                </div>
+                                {%endif%}
+                                <div class="card space icon-relative">
+                                    <input type="text" name="phone" class="input" placeholder="Phone Number">
+                                    <i class="fas fa-address-book"></i>
+                                </div>
+                                <input type="submit" class="pay-btn btn-block" id="make-payment" value="Pay">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                <div class="row new-sec">
+                    {% for item in items%}
+                    <div class="col-12 col-lg-8 col-md-8 col-sm-10 products-list">
+                        <!-- if -->
+                        <img class="img-fluid float-left" id="image-take" src="{{item.food.image_one.url}}" alt="">
+                        <!-- else -->
+                        <div class="float-left item-detail">
+                            <p class=""> <span style="font-size: 16px;">{{item.food.name}}</span></p>
+                            $<span id="price">{{item.food.price}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <hr>
+                <div class="sub-total float-right">
+                    <h6>SUBTOTAL</h4>
+                        <h5 class="float-right">$<span id="order-price">{{order.get_cart_total}}</span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- content stop -->
+{% endblock main_content %} {% comment %} {% endcomment %} {%block main_script%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+<script>
+    function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getToken('csrftoken');
+
+
+    var total = '{{order.get_cart_total}}';
+    var form = document.getElementById('form')
+    var username = '{{request.user.username}}'
+    var user = '{{request.user}}'
+    var email = '{{request.user.email}}'
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // alert("Form Submitted")
+        document.getElementById('form-buttom')
+    })
+    document.getElementById('make-payment').addEventListener('click', function(e) {
+        submitFormData();
+    })
+
+    function submitFormData() {
+        console.log("Payment Button Clicked");
+
+        var userFormData = {
+            'name': null,
+            'email': null,
+            'total': total,
+        }
+        var shippingInfo = {
+            'address': null,
+            'city': null,
+            'state': null,
+            'zipcode': null,
+            'phone': null,
+        }
+        if (user != 'AnonymousUser') {
+            userFormData.name = username
+            userFormData.email = email
+            shippingInfo.address = form.address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.state = form.state.value
+            shippingInfo.zipcode = form.zip.value
+            shippingInfo.phone = form.phone.value
+        } else {
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+            shippingInfo.address = form.address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.state = form.state.value
+            shippingInfo.zipcode = form.zip.value
+            shippingInfo.phone = form.phone.value
+        }
+
+        var url = '/process_order/'
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                    'form': userFormData,
+                    'shipping': shippingInfo
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success', data);
+                swal("Good Job", "Transaction Complete", "success", {
+                    button: "Close",
+                });
+                cart = {}
+                document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+                window.location.href = "{%url 'home'%}"
+                    // window.location.reload();
+            })
+    }
+</script>
+{%endblock main_script%}

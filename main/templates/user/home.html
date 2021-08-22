@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+<!-- extending base html -->
+{%load static%}
+<!-- static file loaded -->
+{%block main_content %}
+<!-- main contents starts here -->
+<style>
+    .extra-input {
+        border: 2px solid #ff5600 !important;
+        height: 70px;
+    }
+    
+    .btn {
+        border-radius: 0px !important;
+    }
+    
+    .hero__btn {
+        padding-top: 50px;
+    }
+    
+    .flaticon-tools-and-utensils-1:hover {
+        color: tomato !important;
+    }
+    
+    .district_name {
+        font-weight: bold;
+    }
+    
+    .district_name:hover {
+        color: tomato !important;
+    }
+</style>
+<main>
+
+    <div class="slider-area ">
+        <div class="slider-active">
+
+            <div class="single-slider slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".2s">Discover Your Taste</span>
+                                <h1 class="col-9" data-animation="fadeInLeft" data-delay=".4s">We believe good food offers great smile</h1>
+                                <p class="col-9" data-animation="fadeInLeft" data-delay=".6s">Would you like thousands of new customers to taste your amazing food? So would we! <br> It's simple: we list your menu online, help you process orders, pick them up, and deliver them to hungry pandas - in a heartbeat!</p>
+
+                                <form class="hero__btn col-10" method="POST">
+                                    {%csrf_token%}
+                                    <div class="input-group mb-2">
+                                        <input type="text" name="search" class="form-control extra-input" placeholder="Search...">
+                                        <div class="input-group-prepent">
+                                            <button class="btn btn-outline-danger shadow-none">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%if user.is_customer or not user.is_authenticated%}
+    <div class="about-low-area section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+
+                        <div class="section-tittle mb-35">
+                            <span>Want To be partner</span>
+                            <h2>Do you want to enlist your restaurant with us?</h2>
+                        </div>
+                        <p>No worries just get in <a href="{%url 'resturant_registration'%}" class="btn btn-danger shadow-none border-btn" style="margin-left: 25px">Enter</a></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Have best sheff for cooking?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-tools-and-utensils-1"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Have delicious food to eat?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-hat"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Have a brand on you own?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Want to provide good quality?.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="about-img ">
+                        <img src="{%static 'front/'%}img/gallery/about.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-low-area section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+
+                        <div class="section-tittle mb-35">
+                            <span>Want To have a delicious food?</span>
+                            <h2>Finding Some places to have a breakfast or dinner?</h2>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Our Enlisted Resturents provide delicious food</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-tools-and-utensils-1"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>We focus on quality not quantity of food</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-hat"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Totaly Zero tollarance on late delivery</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Provide Best Service at any time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="about-img ">
+                        <img src="{%static 'front/'%}img/hero/find.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%else%}
+    <div class="about-low-area section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+
+                        <div class="section-tittle mb-35">
+                            <span>Want To have a delicious food?</span>
+                            <h2>Finding Some places to have a breakfast or dinner?</h2>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Our Enlisted Resturents provide delicious food</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-tools-and-utensils-1"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>We focus on quality not quantity of food</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-hat"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Totaly Zero tollarance on late delivery</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Provide Best Service at any time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="about-img ">
+                        <img src="{%static 'front/'%}img/hero/find.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+
+    <div class="our-services section-padding30">
+        <div class="container">
+            <div class="row">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
+
+                    <div class="section-tittle text-left">
+                        <span>Cities</span>
+                        <h2>Find us in these cities and many more</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {%for i in place%}
+                <a href="{%url 'foods' slug=i.district_name%}">
+                    <div class=" col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-tools-and-utensils-1"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="{%url 'foods' slug=i.district_name%}"><span class="district_name">{{i.district_name}}</span></a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+
+    <div class="about-area2 section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="about-img ">
+                        <img src="{%static 'front/'%}img/gallery/about2.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+
+                        <div class="section-tittle mb-35">
+                            <span>About Our Restaurant</span>
+                            <h2>We Provide Good Food For Your Family!</h2>
+                        </div>
+                        <p class="pera-top">Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit aliquip ex ea commodo consequat is aute irure m, quis nostrud exer</p>
+                        <p class="mb-65 pera-bottom">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected our, or randomised words which don't look even slightly believab If you are going to use a passage.
+                        </p>
+                        <a href="about.html" class="border-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="about-area3 pt-180 pb-170 section-bg" data-background="{%static 'front/'%}img/gallery/section_bg03.png">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-xl-6 col-lg-6 col-md-9 col-sm-11">
+
+                    <div class="section-tittle section-tittle2 mb-40">
+                        <span>About Our Restaurant</span>
+                        <h2>We Provide Good Food For Your Family!</h2>
+                        <p>Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit aliquip ex ea commodo consequat is aute irure m, quis nostrud exer.</p>
+                    </div>
+
+                    <form action="#" class="search-box">
+                        <div class="input-form">
+                            <input type="text" placeholder="Your Email">
+                        </div>
+                        <div class="search-form">
+                            <button>Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<!-- main contents ends here -->
+{%endblock main_content%}
+<!-- we will add our custom scripts here -->
+{%block main_scripts%}
+<!-- main scripts started -->
+<!-- main scripts ended -->
+{%endblock main_scripts%}
